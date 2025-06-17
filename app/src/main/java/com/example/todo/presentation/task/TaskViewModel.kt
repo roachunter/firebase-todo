@@ -27,13 +27,17 @@ class TaskViewModel(
         initialValue = TaskState()
     )
 
+    init {
+        loadTasks()
+    }
+
     private val _effects = Channel<TaskEffect>()
     val effects = _effects.receiveAsFlow()
 
     fun onEvent(event: TaskEvent) {
         when (event) {
             TaskEvent.OnLoadTasksClick -> loadTasks()
-            
+
             is TaskEvent.OnTaskTitleChange -> updateTitle(event.value)
             TaskEvent.OnAddTaskClick -> addTask()
             is TaskEvent.OnDeleteTaskClick -> deleteTask(event.task)
@@ -76,6 +80,7 @@ class TaskViewModel(
             try {
                 taskRepository.addTask(title)
                 _effects.send(TaskEffect.TaskAddingSuccess)
+                _state.update { it.copy(taskTitle = "") }
             } catch (_: Exception) {
                 _effects.send(TaskEffect.TaskAddingFailed)
             }
