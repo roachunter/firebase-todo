@@ -12,6 +12,7 @@ composeBom = "2024.09.00"
 googleServices = "4.4.2"
 firebaseBom = "33.15.0"
 navigation = "2.9.0"
+serialization = "1.8.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,8 +35,11 @@ firebase-firestore = { module = "com.google.firebase:firebase-firestore-ktx" }
 firebase-auth = { module = "com.google.firebase:firebase-auth-ktx" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 
+serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
