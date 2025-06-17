@@ -16,6 +16,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -32,6 +33,7 @@ import com.example.todo.presentation.task.TaskViewModel
 import com.example.todo.presentation.task.screens.TaskListScreen
 import com.example.todo.ui.theme.TodoTheme
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,12 +120,19 @@ class MainActivity : ComponentActivity() {
                             composable<Routes.TaskList> {
                                 val viewModel by viewModels<TaskViewModel>()
                                 val state by viewModel.state.collectAsState()
+                                val coroutineScope = rememberCoroutineScope()
+                                val context = LocalContext.current
 
                                 TaskEffectProcessor(
                                     effects = viewModel.effects,
                                     snackbarHostState = snackbar,
                                     onLogoutSuccess = {
-                                        navController.navigate(Routes.Login)
+                                        coroutineScope.launch {
+                                            snackbar.showSnackbar(
+                                                context.resources.getString(R.string.register_success)
+                                            )
+                                            navController.navigate(Routes.Login)
+                                        }
                                     }
                                 )
 
@@ -153,10 +162,8 @@ fun TaskEffectProcessor(
     LaunchedEffect(Unit) {
         effects.collect { effect ->
             val message = when (effect) {
-                TaskEffect.TaskAddingSuccess -> R.string.task_added
                 TaskEffect.TaskAddingFailed -> R.string.task_adding_failed
                 TaskEffect.TaskTogglingFailed -> R.string.task_toggling_error
-                TaskEffect.TaskDeletingSuccess -> R.string.task_deleted
                 TaskEffect.TaskDeletingFailed -> R.string.task_deleting_error
                 TaskEffect.LogoutSuccess -> {
                     onLogoutSuccess()

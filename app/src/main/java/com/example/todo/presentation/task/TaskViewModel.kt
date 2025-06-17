@@ -79,7 +79,6 @@ class TaskViewModel(
         viewModelScope.launch {
             try {
                 taskRepository.addTask(title)
-                _effects.send(TaskEffect.TaskAddingSuccess)
                 _state.update { it.copy(taskTitle = "") }
             } catch (_: Exception) {
                 _effects.send(TaskEffect.TaskAddingFailed)
@@ -98,7 +97,6 @@ class TaskViewModel(
     private fun deleteTask(task: Task) = viewModelScope.launch {
         try {
             taskRepository.deleteTask(task)
-            _effects.send(TaskEffect.TaskDeletingSuccess)
         } catch (_: Exception) {
             _effects.send(TaskEffect.TaskDeletingFailed)
         }
