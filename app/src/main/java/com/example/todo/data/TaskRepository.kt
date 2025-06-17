@@ -45,7 +45,7 @@ class TaskRepository {
 
     suspend fun addTask(title: String) {
         getUserId()?.let { userId ->
-            val task = Task(title = title, isCompleted = false)
+            val task = Task(title = title, completed = false)
             db.collection("users").document(userId).collection("tasks").add(task).await()
         }
     }
@@ -53,7 +53,7 @@ class TaskRepository {
     suspend fun toggleCompleted(task: Task) {
         getUserId()?.let { userId ->
             db.collection("users").document(userId).collection("tasks").document(task.id)
-                .update("completed", !task.isCompleted).await()
+                .update("completed", !task.completed).await()
         }
     }
 
