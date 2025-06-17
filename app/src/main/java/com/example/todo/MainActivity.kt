@@ -95,7 +95,7 @@ class MainActivity : ComponentActivity() {
                                     viewModel.effects.collect { effect ->
                                         when (effect) {
                                             AuthEffect.OnRegisterSuccess -> {
-                                                navController.navigate(Routes.TaskList)
+                                                navController.navigate(Routes.Login)
                                             }
 
                                             else -> Unit
