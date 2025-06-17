@@ -6,4 +6,4 @@
 - Живі оновлення змін
 
 ### Демонстрація роботи
-[Відео демонстрації роботи](./assets/preview.mp4)
+[Відео демонстрації роботи](https://raw.githubusercontent.com/roachunter/firebase-todo/main/assets/preview.mp4)
