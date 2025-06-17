@@ -5,4 +5,7 @@
     <string name="password_empty_error">Please enter your password.</string>
     <string name="password_error">Password must contain only letters, special symbols and numbers.</string>
     <string name="auth_error">Something went wrong. Please try again.</string>
+    <string name="task_loading_error">Failed to load tasks. Please try again.</string>
+    <string name="task_toggling_error">Failed to toggle completed. Please try again.</string>
+    <string name="task_deleting_error">Failed to delete task. Please try again.</string>
 </resources>
