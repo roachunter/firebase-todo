@@ -14,11 +14,10 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
 class TaskViewModel(
-    private val authService: AuthService,
-    private val taskRepository: TaskRepository
+    private val authService: AuthService = AuthService(),
+    private val taskRepository: TaskRepository = TaskRepository()
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(TaskState())

@@ -13,7 +13,7 @@ import com.example.todo.R
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
-    private val authService: AuthService
+    private val authService: AuthService = AuthService()
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(AuthState())
@@ -97,7 +97,7 @@ class AuthViewModel(
             try {
                 authService.login(email, password)
                 _effects.send(AuthEffect.OnLoginSuccess)
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 _state.update {
                     it.copy(
                         error = R.string.auth_error
