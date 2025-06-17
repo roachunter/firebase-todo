@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Todo</string>
+    <string name="email_error">Please make sure your email is correct.</string>
+    <string name="email_empty_error">Please enter your email.</string>
+    <string name="password_empty_error">Please enter your password.</string>
+    <string name="password_error">Password must contain only letters, special symbols and numbers.</string>
+    <string name="auth_error">Something went wrong. Please try again.</string>
 </resources>
